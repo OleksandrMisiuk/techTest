@@ -32,4 +32,44 @@ public class Query {
             "  meal.hotel_id = hotel.id AND\n" +
             "  package.hotel_id = hotel.id AND\n" +
             "  room.hotel_id = hotel.id ";
+
+    public static String QUERY_FOR_COUNT = "SELECT \n" +
+            "  \"Package\".transfer, \n" +
+            "  \"Package\".insurance, \n" +
+            "  \"Country\".visafee, \n" +
+            "  \"Package\".price as package_price, \n" +
+            "  \"Package\".price_type as package_price_type, \n" +
+            "  \"Hotel\".price_type as hotel_price_type, \n" +
+            "  \"Meal\".price as meal_price, \n" +
+            "  \"Room\".price as room_price, \n" +
+            "  \"Room\".seats, \n" +
+            "  \"Country\".price_type as country_price_type, \n" +
+            "  \"Country\".eu, \n" +
+            "  \"Package\".date_depart, \n" +
+            "  \"Package\".duration\n" +
+            "FROM \n" +
+            "  public.\"City\", \n" +
+            "  public.\"Country\", \n" +
+            "  public.\"Hotel\", \n" +
+            "  public.\"Meal\", \n" +
+            "  public.\"Package\", \n" +
+            "  public.\"Room\"\n" +
+            "WHERE \n" +
+            "  \"City\".country_id = \"Country\".id AND\n" +
+            "  \"Hotel\".city_id = \"City\".id AND\n" +
+            "  \"Meal\".hotel_id = \"Hotel\".id AND\n" +
+            "  \"Package\".hotel_id = \"Hotel\".id AND\n" +
+            "  \"Room\".hotel_id = \"Hotel\".id AND \n" +
+            "  \"Package\".id = ? AND\n" +
+            "  \"Room\".id = ? aND\n" +
+            "  \"Meal\".id = ?;";
+
+    public static String QUERY_GET_CURRENCY_VALUE = "SELECT \n" +
+            "  \"Currency\".value\n" +
+            "FROM \n" +
+            "  public.\"Currency\" \n" +
+            "WHERE \"Currency\".name = ?;";
+
+    public static String QUERY_SET_CURRENCY_VALUE = "UPDATE " +
+            "public.\"Currency\" Set value = ? WHERE \"Currency\".name = ?;";
 }

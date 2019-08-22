@@ -15,10 +15,11 @@ public class Counter {
     private int duration;
     private LocalDate dateDepart;
     private String visaFeeTypePrice;
+    private boolean eu;
 
     public Counter(boolean transfer, boolean insurance, Long packagePrice, Long visaFee, String packagePriceType,
                    Long mealPrice, String hotelPriceType, Long roomPrice, int numberOfPeople, int duration,
-                   LocalDate dateDepart, String visaFeeTypePrice) {
+                   LocalDate dateDepart, String visaFeeTypePrice, boolean eu) {
         this.transfer = transfer;
         this.insurance = insurance;
         this.packagePrice = packagePrice;
@@ -31,6 +32,7 @@ public class Counter {
         this.duration = duration;
         this.dateDepart = dateDepart;
         this.visaFeeTypePrice = visaFeeTypePrice;
+        this.eu = eu;
     }
 
     public Counter() {
@@ -133,6 +135,14 @@ public class Counter {
         this.visaFeeTypePrice = visaFeeTypePrice;
     }
 
+    public boolean isEu() {
+        return eu;
+    }
+
+    public void setEu(boolean eu) {
+        this.eu = eu;
+    }
+
     @Override
     public String toString() {
         return "Counter{" +
@@ -148,6 +158,7 @@ public class Counter {
                 ", duration=" + duration +
                 ", dateDepart=" + dateDepart +
                 ", visaFeeTypePrice='" + visaFeeTypePrice + '\'' +
+                ", eu=" + eu +
                 '}';
     }
 }

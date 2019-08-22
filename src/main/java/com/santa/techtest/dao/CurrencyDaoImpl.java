@@ -1,8 +1,5 @@
 package com.santa.techtest.dao;
 
-import com.santa.techtest.dto.Book;
-import com.santa.techtest.mapper.CounterMapper;
-import com.santa.techtest.model.Counter;
 import com.santa.techtest.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,23 +8,24 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-
 @Repository
-public class CounterDaoImpl implements CounterDao{
+public class CurrencyDaoImpl implements CurrencyDao {
 
     private JdbcTemplate jdbcTemplate;
     private static final Logger logger = LoggerFactory.getLogger(OrderDaoImpl.class);
-    private CounterMapper counterMapper;
 
     @Autowired
-    public CounterDaoImpl(DataSource dataSource, CounterMapper counterMapper) {
+    public CurrencyDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.counterMapper = counterMapper;
     }
 
     @Override
-    public Counter getBill(Book book){
-            return this.jdbcTemplate.queryForObject(Query.QUERY_FOR_COUNT, counterMapper,
-                    book.getPackageId(), book.getRoomId(), book.getMealId());
+    public float getValue(String name) {
+        return this.jdbcTemplate.queryForObject(Query.QUERY_GET_CURRENCY_VALUE, Float.class, name);
+    }
+
+    @Override
+    public boolean setValue(float value, String name) {
+        return this.jdbcTemplate.update(Query.QUERY_SET_CURRENCY_VALUE, value, name)==1?true:false;
     }
 }
